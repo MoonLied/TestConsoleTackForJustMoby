@@ -45,7 +45,7 @@ namespace TestForJustMoby.UserModel
             {
                 if (_ammunition.Count > 0)
                 {
-                    strBilder.Append("\n Амуниция: ");
+                    strBilder.Append("\n Аммуниция: ");
                     for (int i = 0; i < _ammunition.Count; i++)
                     {
                         strBilder.Append("\n " + _ammunition[i].ItemName);
