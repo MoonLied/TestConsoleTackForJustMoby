@@ -1,0 +1,49 @@
+{
+    "locations": [{
+            "id": 1,
+            "locName": "Дорога",
+            "locDesc": "какое-то описание дороги",
+            "LocationsIdForPlayerMove": [2]
+        }, {
+            "id": 2,
+            "locName": "Дорога",
+            "locDesc": "какое-то описание дороги",
+            "LocationsIdForPlayerMove": [1]
+        },
+    ],
+    "npcs": [{
+            "id": 1,
+            "locid": 1,
+            "name": "Бродяга",
+            "desc": "Какое-тоописание Бродяги"
+        },
+    ],
+    "quests": [{
+            "id": 1,
+            "type": "testQuest",
+            "npsid": 1,
+            "name": "Название квеста",
+            "desc": "Описание квеста",
+            "rewarditem": [{
+                    "id": 1,
+                    "c": 50
+                }, {
+                    "id": 2,
+                    "c": 1
+                },
+            ],
+        }
+    ],
+    "items":
+    [{
+            "id": 1,
+            "type": "Resource",
+            "name": "Монета",
+        }, {
+            "id": 2,
+            "type": "Ammunition",
+            "name": "Медальон",
+        },
+    ]
+
+}

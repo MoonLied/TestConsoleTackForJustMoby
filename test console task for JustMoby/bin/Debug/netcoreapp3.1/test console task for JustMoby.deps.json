@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "test console task for JustMoby/1.0.0": {
+        "runtime": {
+          "test console task for JustMoby.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "test console task for JustMoby/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
