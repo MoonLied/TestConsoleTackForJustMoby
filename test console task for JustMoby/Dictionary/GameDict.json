@@ -22,7 +22,7 @@
             "id": 1,
             "type": "testQuest",
             "npsid": 1,
-            "name": "Название квеста",
+            "questName": "Название квеста",
             "desc": "Какое-то описание квеста",
             "rewarditem": [{
                     "id": 1,
@@ -38,11 +38,11 @@
     [{
             "id": 1,
             "type": "Resource",
-            "name": "Монета",
+            "itemName": "Монета",
         }, {
             "id": 2,
             "type": "Ammunition",
-            "name": "Медальон",
+            "itemName": "Медальон",
         },
     ]
 

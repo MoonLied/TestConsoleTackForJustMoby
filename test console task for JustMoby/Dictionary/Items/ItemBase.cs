@@ -13,8 +13,14 @@ namespace TestForJustMoby.Dictionary.ItemsModel
 
         public ItemBase(JSONNode doc)
         {
-            ItemId = doc["id"].AsInt;
-            ItemName = doc["name"].Value;
+            ItemId = doc[_jsonId].AsInt;
+            ItemName = doc[_jsonItemName].Value;
         }
+
+        private const string _jsonId = "id";
+        private const string _jsonItemName = "itemName";
     }
+
+
+   
 }

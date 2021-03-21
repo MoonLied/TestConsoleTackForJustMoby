@@ -24,12 +24,16 @@ namespace TestForJustMoby.Dictionary
         //но это уже больше в наследовании.
 
         public QuestBase(JSONNode node) {
-            Id = node["id"].AsInt;
-            NPCId = node["npsid"].AsInt;
-            QuestName = node["name"].Value;
-            QuestDescription = node["desc"].Value;
+            Id = node[_jsonId].AsInt;
+            NPCId = node[_jsonNPCId].AsInt;
+            QuestName = node[_jsonQuestName].Value;
+            QuestDescription = node[_jsonDescription].Value;
         }
 
-        
+        private const string _jsonId = "id";
+        private const string _jsonNPCId = "npsid";
+        private const string _jsonQuestName = "questName";
+        private const string _jsonDescription = "desc";
+
     }
 }

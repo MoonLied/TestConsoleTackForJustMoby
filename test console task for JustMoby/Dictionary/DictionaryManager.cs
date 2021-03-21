@@ -19,16 +19,13 @@ namespace TestForJustMoby.Dictionary
         }
 
         private const string CollectionLocations = "locations";
-        public Dictionary<int, LocationDict> LocationsDict { get; private set; }
-
         private const string CollectionNPCs = "npcs";
-        public Dictionary<int, NPCDict> NPCsDict { get; private set; }
-
-
         private const string CollectionQuests = "quests";
-        public Dictionary<int, QuestBase> QuestsDict { get; private set; }
-
         private const string CollectionItems = "items";
+
+        public Dictionary<int, LocationDict> LocationsDict { get; private set; }
+        public Dictionary<int, NPCDict> NPCsDict { get; private set; }
+        public Dictionary<int, QuestBase> QuestsDict { get; private set; }
         public Dictionary<int, ItemBase> ItemDict { get; private set; }
 
         public DictionaryManager() {
