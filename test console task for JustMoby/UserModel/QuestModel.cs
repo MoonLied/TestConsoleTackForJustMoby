@@ -16,7 +16,8 @@ namespace TestForJustMoby.UserModel
             СompletedQuests = new List<QuestBase>();
         }
 
-        public void AddQuestComleted(QuestBase quest) {
+        public void AddQuestComleted(QuestBase quest)
+        {
             СompletedQuests.Add(quest);
         }
     }

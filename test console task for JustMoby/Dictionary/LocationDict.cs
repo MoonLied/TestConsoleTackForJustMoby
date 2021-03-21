@@ -11,20 +11,23 @@ namespace TestForJustMoby.Dictionary
         public string LocName { get; private set; }
         public string LocDescription { get; private set; }
         public List<int> LocationsIdForPlayerMove { get; private set; }
-        public List <NPCDict> NPCInLocation { get; private set; }
+        public List<NPCDict> NPCInLocation { get; private set; }
 
-        public LocationDict(JSONNode node) {
+        public LocationDict(JSONNode node)
+        {
             Id = node[_jsonId].AsInt;
             LocName = node[_jsonLocName].Value;
             LocDescription = node[_jsonLocDesc].Value;
             LocationsIdForPlayerMove = new List<int>();
-            foreach (JSONNode doc in node[_jsonLocIdForMove].AsArray) {
+            foreach (JSONNode doc in node[_jsonLocIdForMove].AsArray)
+            {
                 LocationsIdForPlayerMove.Add(doc.AsInt);
             }
         }
 
-        public void AddNPC(NPCDict npc) {
-            if(NPCInLocation==null) NPCInLocation = new List<NPCDict>();
+        public void AddNPC(NPCDict npc)
+        {
+            if (NPCInLocation == null) NPCInLocation = new List<NPCDict>();
             NPCInLocation.Add(npc);
         }
 

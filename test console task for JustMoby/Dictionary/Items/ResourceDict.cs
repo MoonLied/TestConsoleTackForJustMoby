@@ -7,9 +7,8 @@ namespace TestForJustMoby.Dictionary.ItemsModel
 {
     public class ResourceDict : ItemBase
     {
-        public ResourceDict(JSONNode doc) : base(doc)
+        public ResourceDict(JSONNode doc) : base(doc, ItemType.Resource)
         {
-            Type = ItemType.Resource;
         }
     }
 }

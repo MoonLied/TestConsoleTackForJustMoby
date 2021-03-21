@@ -8,26 +8,30 @@ namespace TestForJustMoby.UserModel
 {
     public class InventoryModel
     {
-        public Dictionary<int, int> Resources =>  _resources;
-        public List<AmmunitionDict> Ammunition => _ammunition;
+        public IReadOnlyDictionary<int, int> Resources => _resources;
+        public IReadOnlyList<AmmunitionDict> Ammunition => _ammunition;
 
         private Dictionary<int, int> _resources; // словарь ресурсов где ключ = ИД итема, значение = кол-во
         private List<AmmunitionDict> _ammunition; // лист предметов, они отличаются своей логикой от ресурсов
 
 
-        public InventoryModel() {
+        public InventoryModel()
+        {
             _resources = new Dictionary<int, int>();
             _ammunition = new List<AmmunitionDict>();
         }
 
-        public void AddItem(ItemBase item, int count) {
-            switch (item.Type) {
+        public void AddItem(ItemBase item, int count)
+        {
+            switch (item.Type)
+            {
                 case ItemType.Resource:
-                    if (_resources.ContainsKey(item.ItemId))  _resources[item.ItemId] += count;
+                    if (_resources.ContainsKey(item.ItemId)) _resources[item.ItemId] += count;
                     else _resources[item.ItemId] = count;
                     break;
                 case ItemType.Ammunition:
-                    for (int i = 0; i < count; i++) {
+                    for (int i = 0; i < count; i++)
+                    {
                         _ammunition.Add((AmmunitionDict)item);
                     }
                     break;
@@ -53,11 +57,11 @@ namespace TestForJustMoby.UserModel
                 }
                 if (_resources.Count > 0)
                 {
-                    Dictionary<int, ItemBase> resoucesDict = DictionaryManager.Instance.ItemDict; 
-                     strBilder.Append("\n Ресурсы: ");
-                    foreach(KeyValuePair<int,int> item in _resources)
+                    Dictionary<int, ItemBase> resoucesDict = DictionaryManager.Instance.ItemDict;
+                    strBilder.Append("\n Ресурсы: ");
+                    foreach (KeyValuePair<int, int> item in _resources)
                     {
-                        strBilder.Append("\n "+resoucesDict[item.Key].ItemName+ " - " +item.Value.ToString() + " шт.");
+                        strBilder.Append("\n " + resoucesDict[item.Key].ItemName + " - " + item.Value.ToString() + " шт.");
                     }
                 }
             }

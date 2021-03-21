@@ -12,14 +12,16 @@ namespace TestForJustMoby
         public InventoryModel Inventory { get; private set; }
         public QuestModel PlayerQuest { get; private set; }
 
-        public PlayerModel() {
+        public PlayerModel()
+        {
             // хард код стартовой локации, можно добавить в словарь ИД стартовой локации
             Location = DictionaryManager.Instance.LocationsDict[1];
             Inventory = new InventoryModel();
             PlayerQuest = new QuestModel();
         }
 
-        public void MoveToLocation(LocationDict loc) {
+        public void MoveToLocation(LocationDict loc)
+        {
             Location = loc;
         }
     }

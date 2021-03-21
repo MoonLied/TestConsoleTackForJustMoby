@@ -23,17 +23,18 @@ namespace TestForJustMoby.Dictionary
         //Условия (количественные) 
         //но это уже больше в наследовании.
 
-        public QuestBase(JSONNode node) {
+        public QuestBase(JSONNode node, QuestType type)
+        {
             Id = node[_jsonId].AsInt;
             NPCId = node[_jsonNPCId].AsInt;
             QuestName = node[_jsonQuestName].Value;
             QuestDescription = node[_jsonDescription].Value;
+            Type = type;
         }
 
         private const string _jsonId = "id";
         private const string _jsonNPCId = "npsid";
         private const string _jsonQuestName = "questName";
         private const string _jsonDescription = "desc";
-
     }
 }

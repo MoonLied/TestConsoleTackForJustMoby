@@ -13,14 +13,16 @@ namespace TestForJustMoby.Dictionary
         public string NPCDescription { get; private set; }
         public List<QuestBase> Quests { get; private set; }
 
-        public NPCDict(JSONNode node) { 
+        public NPCDict(JSONNode node)
+        {
             Id = node[_jsonId].AsInt;
             LocationId = node[_jsonLocId].AsInt;
             NPCName = node[_jsonName].Value;
             NPCDescription = node[_jsonDesc].Value;
         }
 
-        public void AddQuest(QuestBase quest) {
+        public void AddQuest(QuestBase quest)
+        {
             if (Quests == null) Quests = new List<QuestBase>();
             Quests.Add(quest);
         }

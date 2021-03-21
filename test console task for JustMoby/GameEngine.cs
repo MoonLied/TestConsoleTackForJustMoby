@@ -21,7 +21,8 @@ namespace TestForJustMoby
         public static GameStatus Status;
         private Dictionary<string, Action> _actionDict;
 
-        public GameEngine() {
+        public GameEngine()
+        {
             Console.WriteLine("Запуск игрового движка");
             Player = new PlayerModel();
             _actionDict = new Dictionary<string, Action>();
@@ -50,7 +51,8 @@ namespace TestForJustMoby
             ActionCreator(GameStatus.Location);
         }
 
-        private void LookLocation(LocationDict loc) {
+        private void LookLocation(LocationDict loc)
+        {
             ActionCreator(GameStatus.LookLocation);
         }
 
@@ -59,12 +61,14 @@ namespace TestForJustMoby
             ActionCreator(GameStatus.NPC, npc);
         }
 
-        private void QuestCompleted(QuestBase quest) {
+        private void QuestCompleted(QuestBase quest)
+        {
             Player.PlayerQuest.AddQuestComleted(quest);
             ActionCreator(GameStatus.Quest, null, quest);
         }
 
-        private void ShowInventory() {
+        private void ShowInventory()
+        {
             Player.Inventory.ShowInventory();
             ActionCreator(GameStatus.Inventory);
         }
@@ -105,7 +109,7 @@ namespace TestForJustMoby
         private void ActionCreatorForLocation(LocationDict loc)
         {
             Console.WriteLine($"{loc.LocName} ({loc.Id})");
-           
+
             Console.WriteLine($"Доступные действия:");
 
             if (loc.NPCInLocation != null)
@@ -121,18 +125,20 @@ namespace TestForJustMoby
 
             ActionCreatorForLookLocation(Player.Location);
 
-            for (int i = 0; i < loc.LocationsIdForPlayerMove.Count; i++) {
+            for (int i = 0; i < loc.LocationsIdForPlayerMove.Count; i++)
+            {
                 LocationDict newLoc = DictionaryManager.Instance.LocationsDict[loc.LocationsIdForPlayerMove[i]];
-                Console.WriteLine($"{_actionDict.Count+1}. Перейти в локацию {newLoc.LocName} ({newLoc.Id})");
-                Action action = new Action(() =>MoveToLocation(newLoc));
+                Console.WriteLine($"{_actionDict.Count + 1}. Перейти в локацию {newLoc.LocName} ({newLoc.Id})");
+                Action action = new Action(() => MoveToLocation(newLoc));
                 _actionDict[(_actionDict.Count + 1).ToString()] = action;
             }
-           
+
 
             AddShowInventoryAction();
         }
 
-        private void ActionCreatorForLookLocation(LocationDict loc) {
+        private void ActionCreatorForLookLocation(LocationDict loc)
+        {
             Console.WriteLine($"{_actionDict.Count + 1}. Осмотреть окретности");
             Action action = new Action(() => LookLocation(loc));
             _actionDict[(_actionDict.Count + 1).ToString()] = action;
@@ -174,20 +180,23 @@ namespace TestForJustMoby
             AddShowInventoryAction();
         }
 
-        private void ActionCreatorForBackLocation() {
+        private void ActionCreatorForBackLocation()
+        {
             Console.WriteLine($"{_actionDict.Count + 1}. Вернуться в локацию");
             Action action = new Action(() => MoveToLocation(Player.Location));
             _actionDict[(_actionDict.Count + 1).ToString()] = action;
         }
 
 
-        private void AddShowInventoryAction() {
+        private void AddShowInventoryAction()
+        {
             Console.WriteLine($"{_actionDict.Count + 1}. Открыть инвентарь");
             Action action = new Action(() => ShowInventory());
             _actionDict[(_actionDict.Count + 1).ToString()] = action;
         }
 
-        private void ActionCreatorForQuest(QuestBase quest) {
+        private void ActionCreatorForQuest(QuestBase quest)
+        {
             Console.WriteLine($"Вы выполнили задание {quest.QuestName}");
             NPCDict npc = DictionaryManager.Instance.NPCsDict[quest.NPCId];
             Console.WriteLine($"{npc.NPCName} передал вам награду:");
@@ -198,10 +207,11 @@ namespace TestForJustMoby
                 case QuestType.testQuest:
                     TestQuest tQuest = (TestQuest)quest;
 
-                    foreach (KeyValuePair<int, int> item in tQuest.QuestRewardItems) {
+                    foreach (KeyValuePair<int, int> item in tQuest.QuestRewardItems)
+                    {
                         ItemBase itemB = DictionaryManager.Instance.ItemDict[item.Key];
                         Console.WriteLine($"{itemB.ItemName} - {item.Value} шт.");
-                        Player.Inventory.AddItem(itemB,item.Value);
+                        Player.Inventory.AddItem(itemB, item.Value);
                     }
                     break;
             }

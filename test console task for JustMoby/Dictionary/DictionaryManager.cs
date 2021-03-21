@@ -8,14 +8,14 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace TestForJustMoby.Dictionary
 {
-   public class DictionaryManager
+    public class DictionaryManager
     {
         public static DictionaryManager Instance => _instance;
         private static DictionaryManager _instance;
 
         public static void Initialize()
         {
-            if(_instance==null) _instance = new DictionaryManager();
+            if (_instance == null) _instance = new DictionaryManager();
         }
 
         private const string CollectionLocations = "locations";
@@ -28,10 +28,11 @@ namespace TestForJustMoby.Dictionary
         public Dictionary<int, QuestBase> QuestsDict { get; private set; }
         public Dictionary<int, ItemBase> ItemDict { get; private set; }
 
-        public DictionaryManager() {
+        public DictionaryManager()
+        {
             Console.WriteLine("Загрузка игрового словоря");
             string srtDict = File.ReadAllText("Dictionary/GameDict.json");
-            JSONNode node = JSON.Parse(srtDict); 
+            JSONNode node = JSON.Parse(srtDict);
 
             LocationsLoad(node[CollectionLocations]);
             NPCsLoad(node[CollectionNPCs]);
@@ -40,9 +41,11 @@ namespace TestForJustMoby.Dictionary
             Console.WriteLine("Игровой словарь загружен");
         }
 
-        private void LocationsLoad(JSONNode node) {
+        private void LocationsLoad(JSONNode node)
+        {
             LocationsDict = new Dictionary<int, LocationDict>();
-            foreach (JSONNode doc in node.AsArray) {
+            foreach (JSONNode doc in node.AsArray)
+            {
                 LocationDict loc = new LocationDict(doc);
                 LocationsDict[loc.Id] = loc;
             }
@@ -85,7 +88,8 @@ namespace TestForJustMoby.Dictionary
             {
                 ItemType type = doc["type"].Value.ToEnumVal<ItemType>();
                 ItemBase item = null;
-                switch (type) {
+                switch (type)
+                {
                     case ItemType.Resource:
                         item = new ResourceDict(doc);
                         break;

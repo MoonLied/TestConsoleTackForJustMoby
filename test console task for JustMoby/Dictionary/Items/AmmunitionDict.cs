@@ -8,9 +8,8 @@ namespace TestForJustMoby.Dictionary.ItemsModel
     public class AmmunitionDict : ItemBase
     {
 
-        public AmmunitionDict(JSONNode doc) : base(doc)
+        public AmmunitionDict(JSONNode doc) : base(doc, ItemType.Ammunition)
         {
-            Type = ItemType.Ammunition;
         }
     }
 }
