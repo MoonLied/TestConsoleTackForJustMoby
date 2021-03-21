@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using test_console_task_for_JustMoby.Dictionary.ItemsModel;
-using test_console_task_for_JustMoby.Dictionary.Quest;
+using TestForJustMoby.Dictionary.ItemsModel;
+using TestForJustMoby.Dictionary.Quest;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace test_console_task_for_JustMoby.Dictionary
+namespace TestForJustMoby.Dictionary
 {
    public class DictionaryManager
     {
@@ -19,10 +19,10 @@ namespace test_console_task_for_JustMoby.Dictionary
         }
 
         private const string CollectionLocations = "locations";
-        public Dictionary<int, LocationModel> LocationsDict { get; private set; }
+        public Dictionary<int, LocationDict> LocationsDict { get; private set; }
 
         private const string CollectionNPCs = "npcs";
-        public Dictionary<int, NPCModel> NPCsDict { get; private set; }
+        public Dictionary<int, NPCDict> NPCsDict { get; private set; }
 
 
         private const string CollectionQuests = "quests";
@@ -44,18 +44,18 @@ namespace test_console_task_for_JustMoby.Dictionary
         }
 
         private void LocationsLoad(JSONNode node) {
-            LocationsDict = new Dictionary<int, LocationModel>();
+            LocationsDict = new Dictionary<int, LocationDict>();
             foreach (JSONNode doc in node.AsArray) {
-                LocationModel loc = new LocationModel(doc);
+                LocationDict loc = new LocationDict(doc);
                 LocationsDict[loc.Id] = loc;
             }
         }
         private void NPCsLoad(JSONNode node)
         {
-            NPCsDict = new Dictionary<int, NPCModel>();
+            NPCsDict = new Dictionary<int, NPCDict>();
             foreach (JSONNode doc in node.AsArray)
             {
-                NPCModel npc = new NPCModel(doc);
+                NPCDict npc = new NPCDict(doc);
                 NPCsDict[npc.Id] = npc;
                 LocationsDict[npc.LocationId].AddNPC(npc);
             }
@@ -71,7 +71,7 @@ namespace test_console_task_for_JustMoby.Dictionary
                 switch (type)
                 {
                     case QuestType.testQuest:
-                        quest = new TestQuest(doc, type);
+                        quest = new TestQuest(doc);
                         break;
                 }
 
@@ -90,10 +90,10 @@ namespace test_console_task_for_JustMoby.Dictionary
                 ItemBase item = null;
                 switch (type) {
                     case ItemType.Resource:
-                        item = new ResouceModel(doc,type);
+                        item = new ResouceDict(doc);
                         break;
                     case ItemType.Ammunition:
-                        item = new AmmunitionModel(doc, type);
+                        item = new AmmunitionDict(doc);
                         break;
                 }
                 if (item != null) ItemDict[item.ItemId] = item;

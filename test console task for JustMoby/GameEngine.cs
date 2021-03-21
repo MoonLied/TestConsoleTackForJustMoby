@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using test_console_task_for_JustMoby.Dictionary;
-using test_console_task_for_JustMoby.Dictionary.ItemsModel;
-using test_console_task_for_JustMoby.Dictionary.Quest;
+using TestForJustMoby.Dictionary;
+using TestForJustMoby.Dictionary.ItemsModel;
+using TestForJustMoby.Dictionary.Quest;
 
-namespace test_console_task_for_JustMoby
+namespace TestForJustMoby
 {
     public class GameEngine
     {
@@ -44,13 +44,17 @@ namespace test_console_task_for_JustMoby
         }
 
         #region Actions
-        private void MoveToLocation(LocationModel loc)
+        private void MoveToLocation(LocationDict loc)
         {
             Player.MoveToLocation(loc);
             ActionCreator(GameStatus.Location);
         }
 
-        private void NPCDialog(NPCModel npc)
+        private void LookLocation(LocationDict loc) {
+            ActionCreator(GameStatus.LookLocation);
+        }
+
+        private void NPCDialog(NPCDict npc)
         {
             ActionCreator(GameStatus.NPC, npc);
         }
@@ -67,7 +71,7 @@ namespace test_console_task_for_JustMoby
         #endregion
 
         #region Action Generator
-        private void ActionCreator(GameStatus status, NPCModel npc = null, QuestBase quest = null)
+        private void ActionCreator(GameStatus status, NPCDict npc = null, QuestBase quest = null)
         {
             Status = status;
             _actionDict.Clear();
@@ -87,37 +91,54 @@ namespace test_console_task_for_JustMoby
                 case GameStatus.Quest:
                     ActionCreatorForQuest(quest);
                     break;
+                case GameStatus.LookLocation:
+                    LocationDict loc = Player.Location;
+                    Console.WriteLine($"{loc.LocName} ({loc.Id})");
+                    Console.WriteLine($"Описание: {loc.LocDescription}");
+                    ActionCreatorForBackLocation();
+                    break;
             }
 
             string str = Console.ReadLine();
             ApplayAction(str);
         }
-        private void ActionCreatorForLocation(LocationModel loc)
+        private void ActionCreatorForLocation(LocationDict loc)
         {
             Console.WriteLine($"{loc.LocName} ({loc.Id})");
-            Console.WriteLine($"Описание: {loc.LocDescription}");
-            Console.WriteLine($"Доступные дествия:");
-            for (int i = 0; i < loc.LocationsIdForPlayerMove.Count; i++) {
-                LocationModel newLoc = DictionaryManager.Instance.LocationsDict[loc.LocationsIdForPlayerMove[i]];
-                Console.WriteLine($"{_actionDict.Count+1}. Перейти на локацию {newLoc.LocName} ({newLoc.Id})");
-                Action action = new Action(() =>MoveToLocation(newLoc));
-                _actionDict[(_actionDict.Count + 1).ToString()] = action;
-            }
+           
+            Console.WriteLine($"Доступные действия:");
+
             if (loc.NPCInLocation != null)
             {
                 for (int i = 0; i < loc.NPCInLocation.Count; i++)
                 {
-                    NPCModel npc = loc.NPCInLocation[i];
+                    NPCDict npc = loc.NPCInLocation[i];
                     Console.WriteLine($"{_actionDict.Count + 1}. Поговорить с {npc.NPCName}");
                     Action action = new Action(() => NPCDialog(npc));
                     _actionDict[(_actionDict.Count + 1).ToString()] = action;
                 }
             }
 
+            ActionCreatorForLookLocation(Player.Location);
+
+            for (int i = 0; i < loc.LocationsIdForPlayerMove.Count; i++) {
+                LocationDict newLoc = DictionaryManager.Instance.LocationsDict[loc.LocationsIdForPlayerMove[i]];
+                Console.WriteLine($"{_actionDict.Count+1}. Перейти в локацию {newLoc.LocName} ({newLoc.Id})");
+                Action action = new Action(() =>MoveToLocation(newLoc));
+                _actionDict[(_actionDict.Count + 1).ToString()] = action;
+            }
+           
+
             AddShowInventoryAction();
         }
 
-        private void ActionCreatorForNPC(NPCModel npc)
+        private void ActionCreatorForLookLocation(LocationDict loc) {
+            Console.WriteLine($"{_actionDict.Count + 1}. Осмотреть окретности");
+            Action action = new Action(() => LookLocation(loc));
+            _actionDict[(_actionDict.Count + 1).ToString()] = action;
+        }
+
+        private void ActionCreatorForNPC(NPCDict npc)
         {
             bool noQuest = true;
             Console.WriteLine($"{npc.NPCName} ({npc.Id})");
@@ -133,7 +154,7 @@ namespace test_console_task_for_JustMoby
                         Console.WriteLine($"Мне нужно {quest.QuestDescription}");
                     }
                 }
-                Console.WriteLine($"Доступные дествия:");
+                Console.WriteLine($"Доступные действия:");
 
                 for (int i = 0; i < npc.Quests.Count; i++)
                 {
@@ -168,7 +189,7 @@ namespace test_console_task_for_JustMoby
 
         private void ActionCreatorForQuest(QuestBase quest) {
             Console.WriteLine($"Вы выполнили задание {quest.QuestName}");
-            NPCModel npc = DictionaryManager.Instance.NPCsDict[quest.NPCId];
+            NPCDict npc = DictionaryManager.Instance.NPCsDict[quest.NPCId];
             Console.WriteLine($"{npc.NPCName} передал вам награду:");
             QuestType type = quest.Type;
 

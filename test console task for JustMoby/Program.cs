@@ -1,7 +1,7 @@
 ﻿using System;
-using test_console_task_for_JustMoby.Dictionary;
+using TestForJustMoby.Dictionary;
 
-namespace test_console_task_for_JustMoby
+namespace TestForJustMoby
 {
     class Program
     {

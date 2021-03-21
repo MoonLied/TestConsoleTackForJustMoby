@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace test_console_task_for_JustMoby.Dictionary
+namespace TestForJustMoby.Dictionary
 {
-    public class NPCModel
+    public class NPCDict
     {
         public int Id { get; private set; }
         public int LocationId { get; private set; }
@@ -13,7 +13,7 @@ namespace test_console_task_for_JustMoby.Dictionary
         public string NPCDescription { get; private set; }
         public List<QuestBase> Quests { get; private set; }
 
-        public NPCModel(JSONNode node) { 
+        public NPCDict(JSONNode node) { 
             Id = node["id"].AsInt;
             LocationId = node["locid"].AsInt;
             NPCName = node["name"].Value;

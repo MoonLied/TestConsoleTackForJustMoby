@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using test_console_task_for_JustMoby.Dictionary;
-using test_console_task_for_JustMoby.UserModel;
+using TestForJustMoby.Dictionary;
+using TestForJustMoby.UserModel;
 
-namespace test_console_task_for_JustMoby
+namespace TestForJustMoby
 {
     public class PlayerModel
     {
-        public LocationModel Location { get; private set; }
+        public LocationDict Location { get; private set; }
         public InventoryModel Inventory { get; private set; }
         public QuestModel PlayerQuest { get; private set; }
 
@@ -19,7 +19,7 @@ namespace test_console_task_for_JustMoby
             PlayerQuest = new QuestModel();
         }
 
-        public void MoveToLocation(LocationModel loc) {
+        public void MoveToLocation(LocationDict loc) {
             Location = loc;
         }
     }

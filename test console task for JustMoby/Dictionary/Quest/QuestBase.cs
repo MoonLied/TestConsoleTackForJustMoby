@@ -1,8 +1,9 @@
-﻿using System;
+﻿using SimpleJson;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace test_console_task_for_JustMoby.Dictionary
+namespace TestForJustMoby.Dictionary
 {
     public class QuestBase
     {
@@ -21,5 +22,14 @@ namespace test_console_task_for_JustMoby.Dictionary
         //минимайльный уровень / репутация игрока / выполненый квест цепочки и т.д. для получения квеста
         //Условия (количественные) 
         //но это уже больше в наследовании.
+
+        public QuestBase(JSONNode node) {
+            Id = node["id"].AsInt;
+            NPCId = node["npsid"].AsInt;
+            QuestName = node["name"].Value;
+            QuestDescription = node["desc"].Value;
+        }
+
+        
     }
 }

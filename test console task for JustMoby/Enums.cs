@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel;
 
-namespace test_console_task_for_JustMoby
+namespace TestForJustMoby
 {
     public enum QuestType
     {
@@ -19,6 +19,7 @@ namespace test_console_task_for_JustMoby
         Location = 1,
         Inventory = 2,
         NPC = 3,
-        Quest = 4
+        Quest = 4,
+        LookLocation = 5
     }
 }
