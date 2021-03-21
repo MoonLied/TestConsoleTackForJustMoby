@@ -15,8 +15,8 @@ namespace TestForJustMoby.Dictionary
 
         public LocationDict(JSONNode node) {
             Id = node[_jsonId].AsInt;
-            LocName = node["locName"].Value;
-            LocDescription = node["locDesc"].Value;
+            LocName = node[_jsonLocName].Value;
+            LocDescription = node[_jsonLocDesc].Value;
             LocationsIdForPlayerMove = new List<int>();
             foreach (JSONNode doc in node[_jsonLocIdForMove].AsArray) {
                 LocationsIdForPlayerMove.Add(doc.AsInt);

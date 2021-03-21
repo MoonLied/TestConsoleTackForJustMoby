@@ -17,11 +17,13 @@ namespace TestForJustMoby.Dictionary.Quest
             {
                 QuestRewardItems = new Dictionary<int, int>();
                 foreach (JSONNode item in node[_jsonRewardItem].AsArray) {
-                    QuestRewardItems[item["id"].AsInt] = item["c"].AsInt;
+                    QuestRewardItems[item[_jsonItemId].AsInt] = item[_jsonItemCount].AsInt;
                 }
             }
         }
 
         private const string _jsonRewardItem = "rewarditem";
+        private const string _jsonItemId = "id";
+        private const string _jsonItemCount = "c";
     }
 }
