@@ -90,7 +90,7 @@ namespace TestForJustMoby.Dictionary
                 ItemBase item = null;
                 switch (type) {
                     case ItemType.Resource:
-                        item = new ResouceDict(doc);
+                        item = new ResourceDict(doc);
                         break;
                     case ItemType.Ammunition:
                         item = new AmmunitionDict(doc);

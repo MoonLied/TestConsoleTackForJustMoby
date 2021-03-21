@@ -5,9 +5,9 @@ using System.Text;
 
 namespace TestForJustMoby.Dictionary.ItemsModel
 {
-    public class ResouceDict : ItemBase
+    public class ResourceDict : ItemBase
     {
-        public ResouceDict(JSONNode doc) : base(doc)
+        public ResourceDict(JSONNode doc) : base(doc)
         {
             Type = ItemType.Resource;
         }
