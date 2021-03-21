@@ -51,7 +51,7 @@ namespace TestForJustMoby
             ActionCreator(GameStatus.Location);
         }
 
-        private void LookLocation(LocationDict loc)
+        private void LookLocation()
         {
             ActionCreator(GameStatus.LookLocation);
         }
@@ -123,7 +123,7 @@ namespace TestForJustMoby
                 }
             }
 
-            ActionCreatorForLookLocation(Player.Location);
+            ActionCreatorForLookLocation();
 
             for (int i = 0; i < loc.LocationsIdForPlayerMove.Count; i++)
             {
@@ -137,10 +137,10 @@ namespace TestForJustMoby
             AddShowInventoryAction();
         }
 
-        private void ActionCreatorForLookLocation(LocationDict loc)
+        private void ActionCreatorForLookLocation()
         {
             Console.WriteLine($"{_actionDict.Count + 1}. Осмотреть окретности");
-            Action action = new Action(() => LookLocation(loc));
+            Action action = new Action(() => LookLocation());
             _actionDict[(_actionDict.Count + 1).ToString()] = action;
         }
 
@@ -215,8 +215,7 @@ namespace TestForJustMoby
                     }
                     break;
             }
-            ActionCreatorForBackLocation();
-            AddShowInventoryAction();
+            ActionCreatorForNPC(DictionaryManager.Instance.NPCsDict[quest.NPCId]);
         }
     }
     #endregion
